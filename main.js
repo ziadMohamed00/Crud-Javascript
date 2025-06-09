@@ -82,17 +82,17 @@ function showData(){
     let table = '';
     for(i = 0; i < datapro.length; i++){
         table += `
-            <tr>
-                <td>${i+1}</td>
-                <td>${datapro[i].title}</td>
-                <td>${datapro[i].price}</td>
-                <td>${datapro[i].taxes}</td>
-                <td>${datapro[i].ads}</td>
-                <td>${datapro[i].discount}</td>
-                <td>${datapro[i].total}</td>
-                <td>${datapro[i].category}</td>
-                <td><button onclick="updeteData(${i})" id="updete">updete</button></td>
-                <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
+             <tr>
+                <td data-label="id">${i+1}</td>
+                <td data-label="title">${datapro[i].title}</td>
+                <td data-label="price">${datapro[i].price}</td>
+                <td data-label="taxes">${datapro[i].taxes}</td>
+                <td data-label="ads">${datapro[i].ads}</td>
+                <td data-label="discount">${datapro[i].discount}</td>
+                <td data-label="total">${datapro[i].total}</td>
+                <td data-label="category">${datapro[i].category}</td>
+                <td data-label="updete"><button onclick="updeteData(${i})" id="updete">updete</button></td>
+                <td data-label="delete"><button onclick="deleteData(${i})" id="delete">delete</button></td>
             </tr>
         `
     }
@@ -160,46 +160,30 @@ function getSearchMood(id){
     showData()
 }
 
+// ...existing code...
 function searchData(value){
     let table = '';
-    for(i = 0; i < datapro.length; i++){
-    if(searchMood == 'title'){
-            if(datapro[i].title.includes(value.toLowerCase())){
-                table += `
-                    <tr>
-                        <td>${i+1}</td>
-                        <td>${datapro[i].title}</td>
-                        <td>${datapro[i].price}</td>
-                        <td>${datapro[i].taxes}</td>
-                        <td>${datapro[i].ads}</td>
-                        <td>${datapro[i].discount}</td>
-                        <td>${datapro[i].total}</td>
-                        <td>${datapro[i].category}</td>
-                        <td><button onclick="updeteData(${i})" id="updete">updete</button></td>
-                        <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
-                    </tr>
-        `
-        }
-    } else{
-            if(datapro[i].category.includes(value.toLowerCase())){
-                table += `
-                    <tr>
-                        <td>${i+1}</td>
-                        <td>${datapro[i].title}</td>
-                        <td>${datapro[i].price}</td>
-                        <td>${datapro[i].taxes}</td>
-                        <td>${datapro[i].ads}</td>
-                        <td>${datapro[i].discount}</td>
-                        <td>${datapro[i].total}</td>
-                        <td>${datapro[i].category}</td>
-                        <td><button onclick="updeteData(${i})" id="updete">updete</button></td>
-                        <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
-                    </tr>
-        `
+    for(let i = 0; i < datapro.length; i++){
+        if(
+            (searchMood == 'title' && datapro[i].title.includes(value.toLowerCase())) ||
+            (searchMood == 'category' && datapro[i].category.includes(value.toLowerCase()))
+        ){
+            table += `
+                <tr>
+                    <td data-label="id">${i+1}</td>
+                    <td data-label="title">${datapro[i].title}</td>
+                    <td data-label="price">${datapro[i].price}</td>
+                    <td data-label="taxes">${datapro[i].taxes}</td>
+                    <td data-label="ads">${datapro[i].ads}</td>
+                    <td data-label="discount">${datapro[i].discount}</td>
+                    <td data-label="total">${datapro[i].total}</td>
+                    <td data-label="category">${datapro[i].category}</td>
+                    <td data-label="updete"><button onclick="updeteData(${i})" id="updete">updete</button></td>
+                    <td data-label="delete"><button onclick="deleteData(${i})" id="delete">delete</button></td>
+                </tr>
+            `
         }
     }
-}
     document.getElementById('tbody').innerHTML = table;
 }
-
-// clean data 
+// ...existing code...
